@@ -1,0 +1,59 @@
+version: "3.8"
+services:
+  theideamonster_api:
+    build: .
+    container_name: "theideamonster_api"
+    hostname: "theideamonster_api"
+    ports:
+      - "8000:8000"
+    volumes:
+      - type: bind
+        source: "./"
+        target: "/var/www"
+    networks:
+      - theideamonster_network
+
+  theideamonster_redis:
+    image: redis:6.2
+    container_name: theideamonster_redis
+    hostname: 'redis'
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - theideamonster_redis_data:/data:rw
+    networks:
+      - theideamonster_network
+
+  theideamonster_db:
+    image: mysql
+    hostname: 'mysql'
+    container_name: theideamonster_db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "theideamonster"
+      MYSQL_ROOT_PASSWORD: "rootroot"
+    volumes:
+      - theideamonster_db_data:/var/lib/mysql:rw
+    networks:
+      - theideamonster_network
+
+  phpmyadmin:
+    image: phpmyadmin
+    hostname: 'phpmyadmin'
+    container_name: 'theideamonster_phpmyadmin'
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - theideamonster_network
+
+networks:
+  theideamonster_network:
+    driver: bridge
+
+volumes:
+  theideamonster_db_data: {}
+  theideamonster_redis_data: {}
