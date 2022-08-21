@@ -2,15 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends AuthenticatableUuid
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    public const MALE_GENDER = 1;
+    public const FEMALE_GENDER = 2;
+
+    public const NORMAL_TYPE = 1;
+
+    public const FIRST_NAME_COLUMN = 'first_name';
+    public const LAST_NAME_COLUMN = 'last_name';
+    public const EMAIL_COLUMN = 'email';
+    public const PASSWORD_COLUMN = 'password';
+    public const VERIFICATION_TOKEN_COLUMN = 'verification_token';
+    public const TYPE_COLUMN = 'type';
+    public const GENDER_COLUMN = 'gender';
+    public const REMEMBER_TOKEN_COLUMN = 'remember_token';
+    public const EMAIL_VERIFIED_AT_COLUMN = 'email_verified_at';
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +31,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        self::FIRST_NAME_COLUMN,
+        self::LAST_NAME_COLUMN,
+        self::EMAIL_COLUMN,
+        self::PASSWORD_COLUMN,
+        self::GENDER_COLUMN,
+        self::TYPE_COLUMN,
+        self::VERIFICATION_TOKEN_COLUMN,
     ];
 
     /**
@@ -29,8 +46,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        self::PASSWORD_COLUMN,
+        self::REMEMBER_TOKEN_COLUMN,
     ];
 
     /**
@@ -39,6 +56,6 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        self::EMAIL_VERIFIED_AT_COLUMN => 'datetime',
     ];
 }
