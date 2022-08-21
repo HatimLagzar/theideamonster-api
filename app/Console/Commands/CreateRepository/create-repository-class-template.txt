@@ -1,0 +1,22 @@
+<?php
+
+namespace __NAMESPACE__;
+
+use App\Repositories\AbstractEloquentRepository;
+use App\Models\__MODEL_NAME__;
+
+class __NAME_OF_CLASS__ extends AbstractEloquentRepository
+{
+    public function findById(string $id): ?__MODEL_NAME__
+    {
+    }
+
+    public function create(array $attributes): __MODEL_NAME__
+    {
+    }
+
+    protected function getModelClass(): string
+    {
+        return __MODEL_NAME__::class;
+    }
+}
