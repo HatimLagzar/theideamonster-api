@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends AuthenticatableUuid
+class User extends AuthenticatableUuid implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -83,5 +84,26 @@ class User extends AuthenticatableUuid
     public function getVerificationToken(): string
     {
         return $this->getAttribute(self::VERIFICATION_TOKEN_COLUMN);
+    }
+
+    public function getGender(): int
+    {
+        return $this->getAttribute(self::GENDER_COLUMN);
+    }
+
+    public function getJWTIdentifier(): string
+    {
+        return $this->getId();
+    }
+
+    public function getJWTCustomClaims(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'firstName' => $this->getFirstName(),
+            'lastName' => $this->getLastName(),
+            'email' => $this->getEmail(),
+            'gender' => $this->getGender(),
+        ];
     }
 }

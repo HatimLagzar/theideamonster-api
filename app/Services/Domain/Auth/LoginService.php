@@ -15,13 +15,12 @@ class LoginService
         string $email,
         string $password,
         string $guard = 'api'
-    ): bool {
+    ): string {
         $token = auth()->guard($guard)->attempt(
             [
                 User::EMAIL_COLUMN => $email,
                 User::PASSWORD_COLUMN => $password,
-            ],
-            true
+            ]
         );
 
         if (is_string($token)) {
