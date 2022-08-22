@@ -15,6 +15,7 @@ class User extends AuthenticatableUuid
 
     public const NORMAL_TYPE = 1;
 
+    public const ID_COLUMN = 'id';
     public const FIRST_NAME_COLUMN = 'first_name';
     public const LAST_NAME_COLUMN = 'last_name';
     public const EMAIL_COLUMN = 'email';
@@ -58,4 +59,29 @@ class User extends AuthenticatableUuid
     protected $casts = [
         self::EMAIL_VERIFIED_AT_COLUMN => 'datetime',
     ];
+
+    public function getId(): string
+    {
+        return $this->getAttribute(self::ID_COLUMN);
+    }
+
+    public function getFirstName(): string
+    {
+        return $this->getAttribute(self::FIRST_NAME_COLUMN);
+    }
+
+    public function getLastName(): string
+    {
+        return $this->getAttribute(self::LAST_NAME_COLUMN);
+    }
+
+    public function getEmail(): string
+    {
+        return $this->getAttribute(self::EMAIL_COLUMN);
+    }
+
+    public function getVerificationToken(): string
+    {
+        return $this->getAttribute(self::VERIFICATION_TOKEN_COLUMN);
+    }
 }
