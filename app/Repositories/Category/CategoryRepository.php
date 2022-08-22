@@ -14,6 +14,8 @@ class CategoryRepository extends AbstractEloquentRepository
 
     public function create(array $attributes): Category
     {
+        return $this->getQueryBuilder()
+            ->create($attributes);
     }
 
     /**

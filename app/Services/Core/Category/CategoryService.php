@@ -23,6 +23,7 @@ class CategoryService
 
     public function create(array $attributes): Category
     {
+        return $this->categoryRepository->create($attributes);
     }
 
     /**
