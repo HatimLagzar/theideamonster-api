@@ -35,7 +35,7 @@ class LoginController extends BaseController
         } catch (IncorrectCredentialsException $e) {
             return $this->withError(
                 'Incorrect credentials!',
-                Response::HTTP_UNPROCESSABLE_ENTITY
+                Response::HTTP_UNAUTHORIZED
             );
         } catch (Throwable $e) {
             Log::error('failed to login', [
