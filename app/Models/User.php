@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -105,5 +106,10 @@ class User extends AuthenticatableUuid implements JWTSubject
             'email' => $this->getEmail(),
             'gender' => $this->getGender(),
         ];
+    }
+
+    public function categories(): HasMany
+    {
+        return $this->hasMany(Category::class, Category::USER_ID_COLUMN, self::ID_COLUMN);
     }
 }
