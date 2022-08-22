@@ -29,6 +29,21 @@ class CategoryRepository extends AbstractEloquentRepository
             ->get();
     }
 
+    public function findByUserAndId(string $userId, string $categoryId): ?Category
+    {
+        return $this->getQueryBuilder()
+            ->where(Category::USER_ID_COLUMN, $userId)
+            ->where(Category::ID_COLUMN, $categoryId)
+            ->first();
+    }
+
+    public function update(string $categoryId, array $attributes): bool
+    {
+        return $this->getQueryBuilder()
+                ->where(Category::ID_COLUMN, $categoryId)
+                ->update($attributes) > 0;
+    }
+
     protected function getModelClass(): string
     {
         return Category::class;

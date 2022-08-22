@@ -17,10 +17,6 @@ class CategoryService
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function findById(string $id): ?Category
-    {
-    }
-
     public function create(array $attributes): Category
     {
         return $this->categoryRepository->create($attributes);
@@ -33,5 +29,15 @@ class CategoryService
     public function getAllByUser(User $user): Collection
     {
         return $this->categoryRepository->getAllByUser($user->getId());
+    }
+
+    public function findByUserAndId(User $user, string $categoryId): ?Category
+    {
+        return $this->categoryRepository->findByUserAndId($user->getId(), $categoryId);
+    }
+
+    public function update(Category $category, array $attributes): bool
+    {
+        return $this->categoryRepository->update($category->getId(), $attributes);
     }
 }
