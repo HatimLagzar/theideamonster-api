@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Requests\Category\CreateCategoryRequest;
 use App\Models\Category;
 use App\Services\Core\Category\CategoryService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -18,7 +19,7 @@ class CreateCategoryController extends BaseController
         $this->categoryService = $categoryService;
     }
 
-    public function __invoke(CreateCategoryRequest $request)
+    public function __invoke(CreateCategoryRequest $request): JsonResponse
     {
         try {
             $user = $this->getAuthUser();
