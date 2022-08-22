@@ -40,4 +40,9 @@ class CategoryService
     {
         return $this->categoryRepository->update($category->getId(), $attributes);
     }
+
+    public function deleteByUserAndId(User $user, string $categoryId): bool
+    {
+        return $this->categoryRepository->deleteByUserAndId($user->getId(), $categoryId);
+    }
 }

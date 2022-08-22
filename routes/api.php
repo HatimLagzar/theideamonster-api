@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Category\CreateCategoryController;
+use App\Http\Controllers\Category\DeleteCategoryController;
 use App\Http\Controllers\Category\GetUserCategoriesController;
 use App\Http\Controllers\Category\UpdateCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -29,5 +30,6 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/', GetUserCategoriesController::class);
         Route::post('/', CreateCategoryController::class);
         Route::post('{id}', UpdateCategoryController::class);
+        Route::delete('{id}', DeleteCategoryController::class);
     });
 });

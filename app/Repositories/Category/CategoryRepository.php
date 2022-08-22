@@ -44,6 +44,14 @@ class CategoryRepository extends AbstractEloquentRepository
                 ->update($attributes) > 0;
     }
 
+    public function deleteByUserAndId(string $userId, string $categoryId): bool
+    {
+        return $this->getQueryBuilder()
+            ->where(Category::ID_COLUMN, $categoryId)
+            ->where(Category::USER_ID_COLUMN, $userId)
+            ->delete() > 0;
+    }
+
     protected function getModelClass(): string
     {
         return Category::class;
