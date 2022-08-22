@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
 use App\Models\Task;
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class TaskSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +14,6 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::factory(10)->has(Task::factory(4))->create();
+        Task::factory()->count(4)->create();
     }
 }

@@ -3,22 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Category extends ModelUuid
+class Task extends ModelUuid
 {
     use HasFactory;
 
-    public const TABLE = 'categories';
+    public const TABLE = 'tasks';
 
     public const ID_COLUMN = 'id';
     public const NAME_COLUMN = 'name';
     public const USER_ID_COLUMN = 'user_id';
+    public const CATEGORY_ID_COLUMN = 'category_id';
 
     protected $table = self::TABLE;
     protected $fillable = [
         self::NAME_COLUMN,
         self::USER_ID_COLUMN,
+        self::CATEGORY_ID_COLUMN,
     ];
 
     public function getId(): string
@@ -36,8 +37,8 @@ class Category extends ModelUuid
         return $this->getAttribute(self::USER_ID_COLUMN);
     }
 
-    public function tasks(): HasMany
+    public function getCategoryId(): string
     {
-        return $this->hasMany(Task::class, Task::CATEGORY_ID_COLUMN, self::ID_COLUMN);
+        return $this->getAttribute(self::CATEGORY_ID_COLUMN);
     }
 }
