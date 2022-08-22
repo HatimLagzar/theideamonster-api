@@ -14,6 +14,8 @@ class TaskRepository extends AbstractEloquentRepository
 
     public function create(array $attributes): Task
     {
+        return $this->getQueryBuilder()
+            ->create($attributes);
     }
 
     /**

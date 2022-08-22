@@ -23,6 +23,7 @@ class TaskService
 
     public function create(array $attributes): Task
     {
+        return $this->taskRepository->create($attributes);
     }
 
     /**
