@@ -28,7 +28,7 @@ class TaskRepository extends AbstractEloquentRepository
     }
 
     /**
-     * @param string $userId
+     * @param string $categoryId
      * @return Collection|Task[]
      */
     public function getAllByCategory(string $categoryId): Collection
