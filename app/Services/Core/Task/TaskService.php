@@ -53,4 +53,9 @@ class TaskService
     {
         return $this->taskRepository->update($task->getId(), $attributes);
     }
+
+    public function deleteByUserAndId(User $user, string $taskId): bool
+    {
+        return $this->taskRepository->deleteByUserAndId($user->getId(), $taskId);
+    }
 }

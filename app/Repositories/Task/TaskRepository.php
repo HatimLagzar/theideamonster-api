@@ -55,6 +55,14 @@ class TaskRepository extends AbstractEloquentRepository
                 ->update($attributes) > 0;
     }
 
+    public function deleteByUserAndId(string $userId, string $taskId): bool
+    {
+        return $this->getQueryBuilder()
+                ->where(Task::ID_COLUMN, $taskId)
+                ->where(Task::USER_ID_COLUMN, $userId)
+                ->delete() > 0;
+    }
+
     protected function getModelClass(): string
     {
         return Task::class;
