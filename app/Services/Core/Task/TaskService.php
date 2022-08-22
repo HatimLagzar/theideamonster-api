@@ -43,4 +43,14 @@ class TaskService
     {
         return $this->taskRepository->getAllByCategory($category->getId());
     }
+
+    public function findByUserAndId(User $user, string $taskId): ?Task
+    {
+        return $this->taskRepository->findByUserAndId($user->getId(), $taskId);
+    }
+
+    public function update(Task $task, array $attributes): bool
+    {
+        return $this->taskRepository->update($task->getId(), $attributes);
+    }
 }

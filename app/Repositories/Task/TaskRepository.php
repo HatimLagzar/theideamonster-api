@@ -40,6 +40,21 @@ class TaskRepository extends AbstractEloquentRepository
             ->get();
     }
 
+    public function findByUserAndId(string $userId, string $taskId): ?Task
+    {
+        return $this->getQueryBuilder()
+            ->where(Task::USER_ID_COLUMN, $userId)
+            ->where(Task::ID_COLUMN, $taskId)
+            ->first();
+    }
+
+    public function update(string $taskId, array $attributes): bool
+    {
+        return $this->getQueryBuilder()
+                ->where(Task::ID_COLUMN, $taskId)
+                ->update($attributes) > 0;
+    }
+
     protected function getModelClass(): string
     {
         return Task::class;
