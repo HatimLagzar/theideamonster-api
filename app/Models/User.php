@@ -24,7 +24,6 @@ class User extends AuthenticatableUuid implements JWTSubject
     public const PASSWORD_COLUMN = 'password';
     public const VERIFICATION_TOKEN_COLUMN = 'verification_token';
     public const TYPE_COLUMN = 'type';
-    public const GENDER_COLUMN = 'gender';
     public const REMEMBER_TOKEN_COLUMN = 'remember_token';
     public const EMAIL_VERIFIED_AT_COLUMN = 'email_verified_at';
 
@@ -38,7 +37,6 @@ class User extends AuthenticatableUuid implements JWTSubject
         self::LAST_NAME_COLUMN,
         self::EMAIL_COLUMN,
         self::PASSWORD_COLUMN,
-        self::GENDER_COLUMN,
         self::TYPE_COLUMN,
         self::VERIFICATION_TOKEN_COLUMN,
     ];
@@ -87,11 +85,6 @@ class User extends AuthenticatableUuid implements JWTSubject
         return $this->getAttribute(self::VERIFICATION_TOKEN_COLUMN);
     }
 
-    public function getGender(): int
-    {
-        return $this->getAttribute(self::GENDER_COLUMN);
-    }
-
     public function getJWTIdentifier(): string
     {
         return $this->getId();
@@ -104,7 +97,6 @@ class User extends AuthenticatableUuid implements JWTSubject
             'firstName' => $this->getFirstName(),
             'lastName' => $this->getLastName(),
             'email' => $this->getEmail(),
-            'gender' => $this->getGender(),
         ];
     }
 
