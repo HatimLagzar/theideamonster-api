@@ -13,6 +13,18 @@ services:
     networks:
       - theideamonster_network
 
+  theideamonster_app:
+    build: "../theideamonster-react"
+    container_name: "theideamonster_app"
+    ports:
+      - "3000:3000"
+    volumes:
+      - type: bind
+        source: "./../theideamonster-react/"
+        target: "/var/www"
+    networks:
+      - theideamonster_network
+
   theideamonster_redis:
     image: redis:6.2
     container_name: theideamonster_redis
