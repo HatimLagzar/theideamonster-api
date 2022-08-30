@@ -28,7 +28,6 @@ class RegisterController extends BaseController
                 $request->get('last_name'),
                 $request->get('email'),
                 $request->get('password'),
-                $request->get('gender'),
             );
 
             return $this->withSuccess([

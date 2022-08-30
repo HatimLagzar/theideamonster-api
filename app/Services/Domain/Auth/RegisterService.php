@@ -22,7 +22,7 @@ class RegisterService
     /**
      * @throws EmailAlreadyInUseException
      */
-    public function register(string $firstName, string $lastName, string $email, string $password, int $gender): User
+    public function register(string $firstName, string $lastName, string $email, string $password): User
     {
         $firstName = htmlspecialchars($firstName);
         $lastName = htmlspecialchars($lastName);
@@ -41,7 +41,6 @@ class RegisterService
             User::PASSWORD_COLUMN => Hash::make($password),
             User::VERIFICATION_TOKEN_COLUMN => Str::random(60),
             User::TYPE_COLUMN => User::NORMAL_TYPE,
-            User::GENDER_COLUMN => $gender,
         ]);
 
         Mail::to($user)->queue(new EmailVerificationMail($user));
