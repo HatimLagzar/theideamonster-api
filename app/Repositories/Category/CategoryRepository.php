@@ -26,6 +26,7 @@ class CategoryRepository extends AbstractEloquentRepository
     {
         return $this->getQueryBuilder()
             ->where(Category::USER_ID_COLUMN, $userId)
+            ->with('tasks')
             ->get();
     }
 
