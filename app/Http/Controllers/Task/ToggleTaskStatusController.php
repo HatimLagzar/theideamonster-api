@@ -5,18 +5,18 @@ namespace App\Http\Controllers\Task;
 use App\Http\Controllers\BaseController;
 use App\Models\Task;
 use App\Services\Core\Task\TaskService;
-use App\Services\Domain\Task\MarkTaskAsDoneService;
+use App\Services\Domain\Task\ToggleTaskStatusService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class MarkTaskAsDoneController extends BaseController
+class ToggleTaskStatusController extends BaseController
 {
-    private MarkTaskAsDoneService $markTaskAsDoneService;
+    private ToggleTaskStatusService $markTaskAsDoneService;
     private TaskService $taskService;
 
     public function __construct(
-        MarkTaskAsDoneService $markTaskAsDoneService,
+        ToggleTaskStatusService $markTaskAsDoneService,
         TaskService $taskService
     ) {
         $this->markTaskAsDoneService = $markTaskAsDoneService;
@@ -31,10 +31,10 @@ class MarkTaskAsDoneController extends BaseController
                 return $this->withError('Task not found!');
             }
 
-            $this->markTaskAsDoneService->markAsDone($task);
+            $this->markTaskAsDoneService->toggle($task);
 
             return $this->withSuccess([
-                'message' => 'Task marked as done!',
+                'message' => 'Task status toggled!',
             ]);
         } catch (Throwable $e) {
             Log::error('failed to mark task as done', [

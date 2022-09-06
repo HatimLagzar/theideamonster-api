@@ -5,7 +5,7 @@ namespace App\Services\Domain\Task;
 use App\Models\Task;
 use App\Services\Core\Task\TaskService;
 
-class MarkTaskAsDoneService
+class ToggleTaskStatusService
 {
     private TaskService $taskService;
 
@@ -14,10 +14,10 @@ class MarkTaskAsDoneService
         $this->taskService = $taskService;
     }
 
-    public function markAsDone(Task $task): bool
+    public function toggle(Task $task): bool
     {
         return $this->taskService->update($task, [
-            Task::DONE_COLUMN => true
+            Task::DONE_COLUMN => !$task->isDone()
         ]);
     }
 }
