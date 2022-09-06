@@ -10,6 +10,9 @@ class TaskRepository extends AbstractEloquentRepository
 {
     public function findById(string $id): ?Task
     {
+        return $this->getQueryBuilder()
+            ->where(Task::ID_COLUMN, $id)
+            ->first();
     }
 
     public function create(array $attributes): Task

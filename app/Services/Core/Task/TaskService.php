@@ -19,6 +19,7 @@ class TaskService
 
     public function findById(string $id): ?Task
     {
+        return $this->taskRepository->findById($id);
     }
 
     public function create(array $attributes): Task
