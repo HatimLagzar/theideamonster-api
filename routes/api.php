@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\SendPasswordResetLinkController;
 use App\Http\Controllers\Category\CreateCategoryController;
 use App\Http\Controllers\Category\DeleteCategoryController;
 use App\Http\Controllers\Category\GetUserCategoriesController;
@@ -27,6 +29,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', RegisterController::class);
 Route::post('login', LoginController::class);
+Route::post('recover-link', SendPasswordResetLinkController::class);
+Route::post('reset-password', ResetPasswordController::class);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', LogoutController::class);
