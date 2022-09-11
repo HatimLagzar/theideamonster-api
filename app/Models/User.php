@@ -5,12 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends AuthenticatableUuid implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use Billable;
 
     public const MALE_GENDER = 1;
     public const FEMALE_GENDER = 2;
@@ -93,15 +97,21 @@ class User extends AuthenticatableUuid implements JWTSubject
     public function getJWTCustomClaims(): array
     {
         return [
-            'id' => $this->getId(),
-            'firstName' => $this->getFirstName(),
-            'lastName' => $this->getLastName(),
-            'email' => $this->getEmail(),
+            'id'           => $this->getId(),
+            'firstName'    => $this->getFirstName(),
+            'lastName'     => $this->getLastName(),
+            'email'        => $this->getEmail(),
+            'isSubscribed' => $this->subscribed()
         ];
     }
 
     public function categories(): HasMany
     {
         return $this->hasMany(Category::class, Category::USER_ID_COLUMN, self::ID_COLUMN);
+    }
+
+    public function getFullName(): string
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
     }
 }

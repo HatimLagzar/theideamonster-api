@@ -9,6 +9,8 @@ use App\Http\Controllers\Category\CreateCategoryController;
 use App\Http\Controllers\Category\DeleteCategoryController;
 use App\Http\Controllers\Category\GetUserCategoriesController;
 use App\Http\Controllers\Category\UpdateCategoryController;
+use App\Http\Controllers\Subscriptions\ConfirmSubscriptionController;
+use App\Http\Controllers\Subscriptions\CreatePaymentIntentController;
 use App\Http\Controllers\Task\CreateTaskController;
 use App\Http\Controllers\Task\DeleteTaskController;
 use App\Http\Controllers\Task\GetCategoryTasksController;
@@ -48,5 +50,10 @@ Route::middleware('auth:api')->group(function () {
         Route::post('{id}/update', UpdateTaskController::class);
         Route::delete('{id}', DeleteTaskController::class);
         Route::patch('{id}/status', ToggleTaskStatusController::class);
+    });
+
+    Route::prefix('subscriptions')->group(function () {
+        Route::post('intent', CreatePaymentIntentController::class);
+        Route::post('confirm/{setupIntentId}', ConfirmSubscriptionController::class);
     });
 });
