@@ -3,6 +3,7 @@
 namespace App\Transformers\Delegable;
 
 use App\Models\Delegable;
+use Illuminate\Database\Eloquent\Collection;
 
 class DelegableTransfomer
 {
@@ -18,5 +19,16 @@ class DelegableTransfomer
             'created_at' => $delegable->getCreatedAt(),
             'updated_at' => $delegable->getUpdatedAt(),
         ];
+    }
+
+    /**
+     * @param Collection|Delegable[] $delegables
+     * @return Collection
+     */
+    public function transformMany(Collection $delegables): Collection
+    {
+        return $delegables->transform(function (Delegable $delegable) {
+            return $this->transform($delegable);
+        });
     }
 }

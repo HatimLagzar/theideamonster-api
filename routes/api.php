@@ -10,6 +10,7 @@ use App\Http\Controllers\Category\DeleteCategoryController;
 use App\Http\Controllers\Category\GetUserCategoriesController;
 use App\Http\Controllers\Category\UpdateCategoryController;
 use App\Http\Controllers\Delegable\CreateController as CreateDelegableController;
+use App\Http\Controllers\Delegable\ListController as ListDelegablesController;
 use App\Http\Controllers\Subscriptions\ConfirmSubscriptionController;
 use App\Http\Controllers\Subscriptions\CreatePaymentIntentController;
 use App\Http\Controllers\Task\CreateTaskController;
@@ -59,6 +60,7 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::prefix('delegables')->group(function () {
+        Route::get('/', ListDelegablesController::class);
         Route::post('/', CreateDelegableController::class);
     });
 });
