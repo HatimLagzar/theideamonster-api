@@ -9,6 +9,7 @@ use App\Http\Controllers\Category\CreateCategoryController;
 use App\Http\Controllers\Category\DeleteCategoryController;
 use App\Http\Controllers\Category\GetUserCategoriesController;
 use App\Http\Controllers\Category\UpdateCategoryController;
+use App\Http\Controllers\Delegable\CreateController as CreateDelegableController;
 use App\Http\Controllers\Subscriptions\ConfirmSubscriptionController;
 use App\Http\Controllers\Subscriptions\CreatePaymentIntentController;
 use App\Http\Controllers\Task\CreateTaskController;
@@ -55,5 +56,9 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('subscriptions')->group(function () {
         Route::post('intent', CreatePaymentIntentController::class);
         Route::post('confirm/{setupIntentId}', ConfirmSubscriptionController::class);
+    });
+
+    Route::prefix('delegables')->group(function () {
+        Route::post('/', CreateDelegableController::class);
     });
 });
