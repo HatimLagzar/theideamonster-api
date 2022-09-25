@@ -10,6 +10,9 @@ class DelegableRepository extends AbstractEloquentRepository
 {
     public function findById(string $id): ?Delegable
     {
+        return $this->getQueryBuilder()
+            ->where(Delegable::ID_COLUMN, $id)
+            ->first();
     }
 
     public function create(array $attributes): Delegable
@@ -36,6 +39,14 @@ class DelegableRepository extends AbstractEloquentRepository
         return $this->getQueryBuilder()
             ->where(Delegable::USER_ID_COLUMN, $userId)
             ->get();
+    }
+
+    public function delete(string $userId, string $delegableId): bool
+    {
+        return $this->getQueryBuilder()
+                ->where(Delegable::ID_COLUMN, $delegableId)
+                ->where(Delegable::USER_ID_COLUMN, $userId)
+                ->delete() > 0;
     }
 
     protected function getModelClass(): string
