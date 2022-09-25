@@ -21,11 +21,13 @@ class CreateDelegableTasksTable extends Migration
 
             $table->foreign('delegable_id')
                 ->references('id')
-                ->on('delegables');
+                ->on('delegables')
+                ->cascadeOnDelete();
 
             $table->foreign('task_id')
                 ->references('id')
-                ->on('tasks');
+                ->on('tasks')
+                ->cascadeOnDelete();;
         });
     }
 
