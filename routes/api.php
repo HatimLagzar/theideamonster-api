@@ -61,13 +61,15 @@ Route::middleware('auth:api')->group(function () {
         Route::post('confirm/{setupIntentId}', ConfirmSubscriptionController::class);
     });
 
-    Route::prefix('delegables')->group(function () {
-        Route::get('/', ListDelegablesController::class);
-        Route::post('/', CreateDelegableController::class);
-        Route::delete('{id}', DeleteDelegableController::class);
-    });
+    Route::middleware('is-subscribed')->group(function () {
+        Route::prefix('delegables')->group(function () {
+            Route::get('/', ListDelegablesController::class);
+            Route::post('/', CreateDelegableController::class);
+            Route::delete('{id}', DeleteDelegableController::class);
+        });
 
-    Route::prefix('profiles')->group(function () {
-        Route::post('{id}', UpdateProfileController::class);
+        Route::prefix('profiles')->group(function () {
+            Route::post('{id}', UpdateProfileController::class);
+        });
     });
 });
