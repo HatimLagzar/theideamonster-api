@@ -16,7 +16,6 @@ class CreateDelegablesTable extends Migration
         Schema::create('delegables', function (Blueprint $table) {
             $table->uuid('id')->unique();
             $table->string('user_id');
-            $table->string('name');
             $table->string('profile_id');
             $table->string('avatar');
             $table->timestamps();
