@@ -11,10 +11,12 @@ class Profile extends ModelUuid
     public const ID_COLUMN = 'id';
     public const NAME_COLUMN = 'name';
     public const JOB_COLUMN = 'job';
+    public const USER_ID_COLUMN = 'user_id';
 
     protected $fillable = [
         self::NAME_COLUMN,
         self::JOB_COLUMN,
+        self::USER_ID_COLUMN,
     ];
 
     public function getId(): string

@@ -3,6 +3,7 @@
 namespace App\Services\Core\Profile;
 
 use App\Models\Profile;
+use App\Models\User;
 use App\Repositories\Profile\ProfileRepository;
 
 class ProfileService
@@ -14,16 +15,18 @@ class ProfileService
         $this->profileRepository = $profileRepository;
     }
 
-    public function findById(string $id): ?Profile
+    public function findById(User $user, string $id): ?Profile
     {
+        return $this->profileRepository->findById($user->getId(), $id);
     }
 
-    public function create(array $attributes): Profile
+    public function getOrCreate(string $name, string $job, string $userId): Profile
     {
+        return $this->profileRepository->getOrCreate($name, $job, $userId);
     }
 
-    public function getOrCreate(string $name, string $job): Profile
+    public function update(Profile $profile, array $attributes): bool
     {
-        return $this->profileRepository->getOrCreate($name, $job);
+        return $this->profileRepository->update($profile->getId(), $attributes);
     }
 }

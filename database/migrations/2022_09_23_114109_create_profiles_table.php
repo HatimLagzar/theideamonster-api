@@ -17,7 +17,13 @@ class CreateProfilesTable extends Migration
             $table->uuid('id')->unique();
             $table->string('name');
             $table->string('job');
+            $table->string('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete();
         });
     }
 
