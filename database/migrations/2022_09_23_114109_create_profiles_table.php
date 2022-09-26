@@ -15,7 +15,7 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->uuid('id')->unique();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('job');
             $table->string('user_id');
             $table->timestamps();
