@@ -11,6 +11,7 @@ class Delegable extends ModelUuid
     use HasFactory;
 
     public const ID_COLUMN = 'id';
+    public const NAME_COLUMN = 'name';
     public const USER_ID_COLUMN = 'user_id';
     public const PROFILE_ID_COLUMN = 'profile_id';
     public const AVATAR_COLUMN = 'avatar';
@@ -18,6 +19,7 @@ class Delegable extends ModelUuid
     public const UPDATED_AT_COLUMN = 'updated_at';
 
     protected $fillable = [
+        self::NAME_COLUMN,
         self::USER_ID_COLUMN,
         self::PROFILE_ID_COLUMN,
         self::AVATAR_COLUMN,
@@ -69,5 +71,10 @@ class Delegable extends ModelUuid
             Profile::ID_COLUMN,
             self::PROFILE_ID_COLUMN
         );
+    }
+
+    public function getName(): string
+    {
+        return $this->getAttribute(self::NAME_COLUMN);
     }
 }

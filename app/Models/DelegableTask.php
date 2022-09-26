@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class DelegableTask extends ModelUuid
 {
@@ -18,9 +18,9 @@ class DelegableTask extends ModelUuid
         self::TASK_ID_COLUMN,
     ];
 
-    public function tasks(): HasMany
+    public function task(): HasOne
     {
-        return $this->hasMany(Task::class, Task::ID_COLUMN, self::TASK_ID_COLUMN);
+        return $this->hasOne(Task::class, Task::ID_COLUMN, self::TASK_ID_COLUMN);
     }
 
     public function delegable(): BelongsTo

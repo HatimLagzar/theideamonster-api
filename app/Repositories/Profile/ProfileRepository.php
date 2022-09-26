@@ -19,11 +19,10 @@ class ProfileRepository extends AbstractEloquentRepository
     {
     }
 
-    public function getOrCreate(string $name, string $job, string $userId): Profile
+    public function getOrCreate(string $job, string $userId): Profile
     {
         return $this->getQueryBuilder()
             ->firstOrCreate([
-                Profile::NAME_COLUMN    => $name,
                 Profile::JOB_COLUMN     => $job,
                 Profile::USER_ID_COLUMN => $userId,
             ]);
