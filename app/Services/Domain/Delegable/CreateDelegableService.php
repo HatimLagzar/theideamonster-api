@@ -32,13 +32,12 @@ class CreateDelegableService
         array $tasks,
         string $avatar
     ): Delegable {
-        $profile = $this->profileService->getOrCreate($job ?: '', $user->getId());
+        $profile = $this->profileService->getOrCreate($job ?: '', $avatar, $user->getId());
 
         $delegable = $this->delegableService->create([
             Delegable::USER_ID_COLUMN    => $user->getId(),
             Delegable::NAME_COLUMN       => $name,
             Delegable::PROFILE_ID_COLUMN => $profile->getId(),
-            Delegable::AVATAR_COLUMN     => $avatar,
         ]);
 
         foreach ($tasks as $taskId) {

@@ -12,10 +12,12 @@ class Profile extends ModelUuid
     public const NAME_COLUMN = 'name';
     public const JOB_COLUMN = 'job';
     public const USER_ID_COLUMN = 'user_id';
+    public const AVATAR_COLUMN = 'avatar';
 
     protected $fillable = [
         self::NAME_COLUMN,
         self::JOB_COLUMN,
+        self::AVATAR_COLUMN,
         self::USER_ID_COLUMN,
     ];
 

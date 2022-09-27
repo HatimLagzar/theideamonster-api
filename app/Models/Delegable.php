@@ -14,7 +14,6 @@ class Delegable extends ModelUuid
     public const NAME_COLUMN = 'name';
     public const USER_ID_COLUMN = 'user_id';
     public const PROFILE_ID_COLUMN = 'profile_id';
-    public const AVATAR_COLUMN = 'avatar';
     public const CREATED_AT_COLUMN = 'created_at';
     public const UPDATED_AT_COLUMN = 'updated_at';
 
@@ -22,7 +21,6 @@ class Delegable extends ModelUuid
         self::NAME_COLUMN,
         self::USER_ID_COLUMN,
         self::PROFILE_ID_COLUMN,
-        self::AVATAR_COLUMN,
     ];
 
     public function getId(): string

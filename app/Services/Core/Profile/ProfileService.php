@@ -20,9 +20,9 @@ class ProfileService
         return $this->profileRepository->findById($user->getId(), $id);
     }
 
-    public function getOrCreate(string $job, string $userId): Profile
+    public function getOrCreate(string $job, string $avatar, string $userId): Profile
     {
-        return $this->profileRepository->getOrCreate($job, $userId);
+        return $this->profileRepository->getOrCreate($job, $avatar, $userId);
     }
 
     public function update(Profile $profile, array $attributes): bool
