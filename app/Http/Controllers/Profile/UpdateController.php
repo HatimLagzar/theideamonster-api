@@ -32,8 +32,9 @@ class UpdateController extends BaseController
             $user = $this->getAuthUser();
 
             $profile = $this->updateProfileService->update($user, $profileId, [
-                Profile::NAME_COLUMN => $request->get('name'),
-                Profile::JOB_COLUMN  => $request->get('job'),
+                Profile::NAME_COLUMN   => $request->get('name'),
+                Profile::JOB_COLUMN    => $request->get('job'),
+                Profile::AVATAR_COLUMN => $request->get('avatar'),
             ]);
 
             return $this->withSuccess([
