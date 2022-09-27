@@ -38,6 +38,7 @@ class DelegableRepository extends AbstractEloquentRepository
     {
         return $this->getQueryBuilder()
             ->where(Delegable::USER_ID_COLUMN, $userId)
+            ->latest()
             ->get();
     }
 
