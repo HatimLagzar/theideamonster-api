@@ -16,7 +16,6 @@ class DelegableTransfomer
             'name'       => $delegable->getName(),
             'user_id'    => $delegable->getUserId(),
             'profile_id' => $delegable->getProfileId(),
-            'avatar'     => $delegable->getAvatar(),
             'tasks'      => Arr::flatten($delegable->delegableTasks()->get()
                 ->transform(function (DelegableTask $delegableTask) {
                     return $delegableTask->task()->get();
