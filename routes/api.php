@@ -12,6 +12,7 @@ use App\Http\Controllers\Category\UpdateCategoryController;
 use App\Http\Controllers\Delegable\CreateController as CreateDelegableController;
 use App\Http\Controllers\Delegable\DeleteController as DeleteDelegableController;
 use App\Http\Controllers\Delegable\ListController as ListDelegablesController;
+use App\Http\Controllers\Delegable\UpdateController as UpdateDelegableController;
 use App\Http\Controllers\Profile\UpdateController as UpdateProfileController;
 use App\Http\Controllers\Subscriptions\ConfirmSubscriptionController;
 use App\Http\Controllers\Subscriptions\CreatePaymentIntentController;
@@ -65,7 +66,7 @@ Route::middleware('auth:api')->group(function () {
         Route::prefix('delegables')->group(function () {
             Route::get('/', ListDelegablesController::class);
             Route::post('/', CreateDelegableController::class);
-            Route::post('{id}', CreateDelegableController::class);
+            Route::post('{id}', UpdateDelegableController::class);
             Route::delete('{id}', DeleteDelegableController::class);
         });
 
