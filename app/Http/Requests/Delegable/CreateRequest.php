@@ -9,10 +9,9 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'   => ['required', 'string', 'max:255'],
-            'job'    => ['required', 'string', 'max:255'],
-            'tasks'  => ['required'],
-            'avatar' => ['required']
+            'name'  => ['required', 'string', 'max:255'],
+            'job'   => ['required', 'string', 'max:255'],
+            'tasks' => ['required'],
         ];
     }
 }

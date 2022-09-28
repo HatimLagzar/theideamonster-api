@@ -50,6 +50,13 @@ class DelegableRepository extends AbstractEloquentRepository
                 ->delete() > 0;
     }
 
+    public function update(string $id, array $attributes): bool
+    {
+        return $this->getQueryBuilder()
+                ->where(Delegable::ID_COLUMN, $id)
+                ->update($attributes) > 0;
+    }
+
     protected function getModelClass(): string
     {
         return Delegable::class;

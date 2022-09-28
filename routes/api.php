@@ -65,6 +65,7 @@ Route::middleware('auth:api')->group(function () {
         Route::prefix('delegables')->group(function () {
             Route::get('/', ListDelegablesController::class);
             Route::post('/', CreateDelegableController::class);
+            Route::post('{id}', CreateDelegableController::class);
             Route::delete('{id}', DeleteDelegableController::class);
         });
 

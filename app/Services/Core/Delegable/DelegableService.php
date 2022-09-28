@@ -47,4 +47,9 @@ class DelegableService
     {
         return $this->delegableRepository->delete($user->getId(), $delegable->getId());
     }
+
+    public function update(Delegable $delegable, array $attributes): bool
+    {
+        return $this->delegableRepository->update($delegable->getId(), $attributes);
+    }
 }
