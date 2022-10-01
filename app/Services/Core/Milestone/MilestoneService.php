@@ -5,6 +5,7 @@ namespace App\Services\Core\Milestone;
 use App\Models\Milestone;
 use App\Models\User;
 use App\Repositories\Milestone\MilestoneRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class MilestoneService
 {
@@ -28,5 +29,14 @@ class MilestoneService
     public function delete(Milestone $milestone): bool
     {
         return $this->milestoneRepository->delete($milestone->getId());
+    }
+
+    /**
+     * @param User $user
+     * @return Milestone[]|Collection
+     */
+    public function getAllByUser(User $user): Collection
+    {
+        return $this->milestoneRepository->getAllByUser($user->getId());
     }
 }

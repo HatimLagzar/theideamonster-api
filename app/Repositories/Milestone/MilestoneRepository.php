@@ -4,6 +4,7 @@ namespace App\Repositories\Milestone;
 
 use App\Models\Milestone;
 use App\Repositories\AbstractEloquentRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class MilestoneRepository extends AbstractEloquentRepository
 {
@@ -26,6 +27,17 @@ class MilestoneRepository extends AbstractEloquentRepository
         return $this->getQueryBuilder()
                 ->where(Milestone::ID_COLUMN, $id)
                 ->delete() > 0;
+    }
+
+    /**
+     * @param string $userId
+     * @return Milestone[]|Collection
+     */
+    public function getAllByUser(string $userId): Collection
+    {
+        return $this->getQueryBuilder()
+            ->where(Milestone::USER_ID_COLUMN, $userId)
+            ->get();
     }
 
     protected function getModelClass(): string
