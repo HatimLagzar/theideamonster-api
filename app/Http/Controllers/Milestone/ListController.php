@@ -17,7 +17,7 @@ class ListController extends BaseController
         $this->milestoneService = $milestoneService;
     }
 
-    public function __invoke(string $id): JsonResponse
+    public function __invoke(): JsonResponse
     {
         try {
             $user = $this->getAuthUser();
