@@ -22,4 +22,9 @@ class Milestone extends ModelUuid
         self::BASKET_ID_COLUMN,
         self::ENDS_AT_COLUMN,
     ];
+
+    public function getId(): string
+    {
+        return $this->getAttribute(self::ID_COLUMN);
+    }
 }

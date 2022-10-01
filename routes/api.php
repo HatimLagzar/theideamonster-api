@@ -14,6 +14,7 @@ use App\Http\Controllers\Delegable\DeleteController as DeleteDelegableController
 use App\Http\Controllers\Delegable\ListController as ListDelegablesController;
 use App\Http\Controllers\Delegable\UpdateController as UpdateDelegableController;
 use App\Http\Controllers\Milestone\CreateController as CreateMilestoneController;
+use App\Http\Controllers\Milestone\DeleteController as DeleteMilestoneController;
 use App\Http\Controllers\Profile\UpdateController as UpdateProfileController;
 use App\Http\Controllers\Subscriptions\ConfirmSubscriptionController;
 use App\Http\Controllers\Subscriptions\CreatePaymentIntentController;
@@ -73,6 +74,7 @@ Route::middleware('auth:api')->group(function () {
 
         Route::prefix('milestones')->group(function () {
             Route::post('/', CreateMilestoneController::class);
+            Route::delete('{id}', DeleteMilestoneController::class);
         });
 
         Route::prefix('profiles')->group(function () {
