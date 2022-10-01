@@ -40,6 +40,13 @@ class MilestoneRepository extends AbstractEloquentRepository
             ->get();
     }
 
+    public function update(string $id, array $attributes): bool
+    {
+        return $this->getQueryBuilder()
+                ->where(Milestone::ID_COLUMN, $id)
+                ->update($attributes) > 0;
+    }
+
     protected function getModelClass(): string
     {
         return Milestone::class;

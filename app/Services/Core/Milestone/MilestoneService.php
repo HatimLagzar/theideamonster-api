@@ -39,4 +39,9 @@ class MilestoneService
     {
         return $this->milestoneRepository->getAllByUser($user->getId());
     }
+
+    public function update(Milestone $milestone, array $attributes): bool
+    {
+        return $this->milestoneRepository->update($milestone->getId(), $attributes);
+    }
 }
