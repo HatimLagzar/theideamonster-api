@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Requests\Milestone\CreateMilestoneRequest;
 use App\Models\Milestone;
 use App\Services\Core\Milestone\MilestoneService;
+use App\Transformers\Milestone\MilestoneTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -13,10 +14,12 @@ use Throwable;
 class CreateController extends BaseController
 {
     private MilestoneService $milestoneService;
+    private MilestoneTransformer $milestoneTransformer;
 
-    public function __construct(MilestoneService $milestoneService)
+    public function __construct(MilestoneService $milestoneService, MilestoneTransformer $milestoneTransformer)
     {
         $this->milestoneService = $milestoneService;
+        $this->milestoneTransformer = $milestoneTransformer;
     }
 
     public function __invoke(CreateMilestoneRequest $request): JsonResponse
@@ -25,14 +28,16 @@ class CreateController extends BaseController
             $user = $this->getAuthUser();
 
             $milestone = $this->milestoneService->create([
-                Milestone::USER_ID_COLUMN   => $user->getId(),
-                Milestone::BASKET_ID_COLUMN => $request->get('basket_id'),
-                Milestone::ENDS_AT_COLUMN   => $request->get('ends_at'),
+                Milestone::USER_ID_COLUMN    => $user->getId(),
+                Milestone::BASKET_ID_COLUMN  => $request->get('basket_id'),
+                Milestone::ENDS_AT_COLUMN    => $request->get('ends_at'),
+                Milestone::PERCENTAGE_COLUMN => 0,
+                Milestone::IS_DONE_COLUMN    => false,
             ]);
 
             return $this->withSuccess([
                 'message'   => 'Milestone created successfully',
-                'milestone' => $milestone
+                'milestone' => $this->milestoneTransformer->transform($milestone)
             ]);
         } catch (Throwable $e) {
             Log::error('failed to create milestone', [

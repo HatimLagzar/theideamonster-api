@@ -28,6 +28,8 @@ class Milestone extends ModelUuid
         self::USER_ID_COLUMN,
         self::BASKET_ID_COLUMN,
         self::ENDS_AT_COLUMN,
+        self::PERCENTAGE_COLUMN,
+        self::IS_DONE_COLUMN,
     ];
 
     protected $with = [
