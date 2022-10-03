@@ -18,6 +18,7 @@ use App\Http\Controllers\Milestone\DeleteController as DeleteMilestoneController
 use App\Http\Controllers\Milestone\ListController as ListMilestonesController;
 use App\Http\Controllers\Milestone\UpdateController as UpdateMilestoneController;
 use App\Http\Controllers\Profile\UpdateController as UpdateProfileController;
+use App\Http\Controllers\Quote\GetRandomQuoteController;
 use App\Http\Controllers\Subscriptions\ConfirmSubscriptionController;
 use App\Http\Controllers\Subscriptions\CreatePaymentIntentController;
 use App\Http\Controllers\Task\CreateTaskController;
@@ -64,6 +65,10 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('subscriptions')->group(function () {
         Route::post('intent', CreatePaymentIntentController::class);
         Route::post('confirm/{setupIntentId}', ConfirmSubscriptionController::class);
+    });
+
+    Route::prefix('quotes')->group(function () {
+        Route::get('/', GetRandomQuoteController::class);
     });
 
     Route::middleware('is-subscribed')->group(function () {
