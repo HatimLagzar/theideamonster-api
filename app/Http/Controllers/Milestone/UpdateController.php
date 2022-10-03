@@ -31,9 +31,10 @@ class UpdateController extends BaseController
             }
 
             $this->milestoneService->update($milestone, [
-                Milestone::BASKET_ID_COLUMN => $request->get('basket_id'),
-                Milestone::ENDS_AT_COLUMN   => $request->get('ends_at'),
-                Milestone::IS_DONE_COLUMN   => $request->get('is_done'),
+                Milestone::BASKET_ID_COLUMN  => $request->get('basket_id'),
+                Milestone::ENDS_AT_COLUMN    => $request->get('ends_at'),
+                Milestone::IS_DONE_COLUMN    => $request->get('is_done'),
+                Milestone::PERCENTAGE_COLUMN => $request->get('percentage'),
             ]);
 
             return $this->withSuccess([
