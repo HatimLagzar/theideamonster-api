@@ -4,19 +4,18 @@ namespace App\Http\Controllers\Task;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Task\CreateTaskRequest;
-use App\Models\Task;
-use App\Services\Core\Task\TaskService;
+use App\Services\Domain\Task\CreateTaskService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class CreateTaskController extends BaseController
 {
-    private TaskService $taskService;
+    private CreateTaskService $createTaskService;
 
-    public function __construct(TaskService $taskService)
+    public function __construct(CreateTaskService $createTaskService)
     {
-        $this->taskService = $taskService;
+        $this->createTaskService = $createTaskService;
     }
 
     public function __invoke(CreateTaskRequest $request, string $categoryId): JsonResponse
@@ -24,15 +23,17 @@ class CreateTaskController extends BaseController
         try {
             $user = $this->getAuthUser();
 
-            $task = $this->taskService->create([
-                Task::CONTENT_COLUMN     => $request->get('content'),
-                Task::USER_ID_COLUMN     => $user->getId(),
-                Task::CATEGORY_ID_COLUMN => $categoryId,
-            ]);
+            $task = $this->createTaskService->create(
+                $user,
+                $request->get('type'),
+                $categoryId,
+                $request->get('content'),
+                $request->file('audio')
+            );
 
             return $this->withSuccess([
                 'message' => 'Task created successfully.',
-                'task' => $task
+                'task'    => $task
             ]);
         } catch (Throwable $e) {
             Log::error('failed to create task', [

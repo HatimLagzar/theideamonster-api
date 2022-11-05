@@ -15,9 +15,10 @@ class Task extends ModelUuid
     public const USER_ID_COLUMN = 'user_id';
     public const CATEGORY_ID_COLUMN = 'category_id';
     public const DONE_COLUMN = 'done';
+    public const TYPE_COLUMN = 'type';
 
     public const STRING_TYPE = 1;
-    public const AUDIO_TYPE = 1;
+    public const AUDIO_TYPE = 2;
 
     protected $table = self::TABLE;
     protected $fillable = [
@@ -28,7 +29,8 @@ class Task extends ModelUuid
     ];
 
     protected $casts = [
-        self::DONE_COLUMN => 'bool'
+        self::DONE_COLUMN => 'bool',
+        self::TYPE_COLUMN => 'integer',
     ];
 
     public function getId(): string
