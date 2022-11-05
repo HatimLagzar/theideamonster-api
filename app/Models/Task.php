@@ -16,6 +16,9 @@ class Task extends ModelUuid
     public const CATEGORY_ID_COLUMN = 'category_id';
     public const DONE_COLUMN = 'done';
 
+    public const STRING_TYPE = 1;
+    public const AUDIO_TYPE = 1;
+
     protected $table = self::TABLE;
     protected $fillable = [
         self::CONTENT_COLUMN,
