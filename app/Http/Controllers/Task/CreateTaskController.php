@@ -25,7 +25,7 @@ class CreateTaskController extends BaseController
 
             $task = $this->createTaskService->create(
                 $user,
-                $request->get('type'),
+                intval($request->get('type')),
                 $categoryId,
                 $request->get('content'),
                 $request->file('audio')
