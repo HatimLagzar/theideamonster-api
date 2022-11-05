@@ -25,8 +25,8 @@ class CreateTaskController extends BaseController
             $user = $this->getAuthUser();
 
             $task = $this->taskService->create([
-                Task::NAME_COLUMN => $request->get('name'),
-                Task::USER_ID_COLUMN => $user->getId(),
+                Task::CONTENT_COLUMN     => $request->get('content'),
+                Task::USER_ID_COLUMN     => $user->getId(),
                 Task::CATEGORY_ID_COLUMN => $categoryId,
             ]);
 

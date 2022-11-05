@@ -11,14 +11,14 @@ class Task extends ModelUuid
     public const TABLE = 'tasks';
 
     public const ID_COLUMN = 'id';
-    public const NAME_COLUMN = 'name';
+    public const CONTENT_COLUMN = 'content';
     public const USER_ID_COLUMN = 'user_id';
     public const CATEGORY_ID_COLUMN = 'category_id';
     public const DONE_COLUMN = 'done';
 
     protected $table = self::TABLE;
     protected $fillable = [
-        self::NAME_COLUMN,
+        self::CONTENT_COLUMN,
         self::USER_ID_COLUMN,
         self::CATEGORY_ID_COLUMN,
         self::DONE_COLUMN,
@@ -33,9 +33,9 @@ class Task extends ModelUuid
         return $this->getAttribute(self::ID_COLUMN);
     }
 
-    public function getName(): string
+    public function getContent(): string
     {
-        return $this->getAttribute(self::NAME_COLUMN);
+        return $this->getAttribute(self::CONTENT_COLUMN);
     }
 
     public function getUserId(): string

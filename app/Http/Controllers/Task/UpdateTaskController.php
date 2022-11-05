@@ -31,7 +31,7 @@ class UpdateTaskController extends BaseController
             }
 
             $this->taskService->update($task, [
-                Task::NAME_COLUMN => $request->get('name'),
+                Task::CONTENT_COLUMN => $request->get('content'),
                 Task::USER_ID_COLUMN => $user->getId(),
             ]);
 
