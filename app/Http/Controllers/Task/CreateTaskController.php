@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Task;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Task\CreateTaskRequest;
 use App\Services\Domain\Task\CreateTaskService;
+use App\Transformers\Task\TaskTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -12,10 +13,12 @@ use Throwable;
 class CreateTaskController extends BaseController
 {
     private CreateTaskService $createTaskService;
+    private TaskTransformer $taskTransformer;
 
-    public function __construct(CreateTaskService $createTaskService)
+    public function __construct(CreateTaskService $createTaskService, TaskTransformer $taskTransformer)
     {
         $this->createTaskService = $createTaskService;
+        $this->taskTransformer = $taskTransformer;
     }
 
     public function __invoke(CreateTaskRequest $request, string $categoryId): JsonResponse
@@ -33,7 +36,7 @@ class CreateTaskController extends BaseController
 
             return $this->withSuccess([
                 'message' => 'Task created successfully.',
-                'task'    => $task
+                'task'    => $this->taskTransformer->transform($task)
             ]);
         } catch (Throwable $e) {
             Log::error('failed to create task', [
