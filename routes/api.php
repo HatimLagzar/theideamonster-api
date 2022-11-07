@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SendPasswordResetLinkController;
+use App\Http\Controllers\Calendar\StoreController as StoreInCalendarController;
 use App\Http\Controllers\Category\CreateCategoryController;
 use App\Http\Controllers\Category\DeleteCategoryController;
 use App\Http\Controllers\Category\GetUserCategoriesController;
@@ -88,6 +89,10 @@ Route::middleware('auth:api')->group(function () {
 
         Route::prefix('profiles')->group(function () {
             Route::post('{id}', UpdateProfileController::class);
+        });
+
+        Route::prefix('calendar')->group(function () {
+            Route::post('/', StoreInCalendarController::class);
         });
     });
 });
