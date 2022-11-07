@@ -17,8 +17,8 @@ class CreateCalendarTable extends Migration
             $table->uuid('id')->unique();
             $table->string('basket_id');
             $table->string('task_id')->nullable();
-            $table->dateTime('starts_at');
-            $table->dateTime('ends_at');
+            $table->dateTime('starts_at')->nullable();
+            $table->dateTime('ends_at')->nullable();
         });
     }
 
