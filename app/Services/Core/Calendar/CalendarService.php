@@ -34,4 +34,9 @@ class CalendarService
     {
         return $this->calendarRepository->update($calendar->getId(), $attributes);
     }
+
+    public function delete(User $user, string $id): bool
+    {
+        return $this->calendarRepository->delete($user->getId(), $id);
+    }
 }

@@ -35,6 +35,14 @@ class CalendarRepository extends AbstractEloquentRepository
                 ->update($attributes) > 0;
     }
 
+    public function delete(string $userId, string $id): bool
+    {
+        return $this->getQueryBuilder()
+                ->where(Calendar::ID_COLUMN, $id)
+                ->where(Calendar::USER_ID_COLUMN, $userId)
+                ->delete() > 0;
+    }
+
     protected function getModelClass(): string
     {
         return Calendar::class;
