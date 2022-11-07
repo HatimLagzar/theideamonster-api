@@ -20,6 +20,21 @@ class CalendarRepository extends AbstractEloquentRepository
             ->create($attributes);
     }
 
+    public function findByUserAndId(string $userId, string $id): ?Calendar
+    {
+        return $this->getQueryBuilder()
+            ->where(Calendar::ID_COLUMN, $id)
+            ->where(Calendar::USER_ID_COLUMN, $userId)
+            ->first();
+    }
+
+    public function update(string $id, array $attributes): bool
+    {
+        return $this->getQueryBuilder()
+                ->where(Calendar::ID_COLUMN, $id)
+                ->update($attributes) > 0;
+    }
+
     protected function getModelClass(): string
     {
         return Calendar::class;

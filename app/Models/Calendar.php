@@ -32,4 +32,9 @@ class Calendar extends ModelUuid
         self::STARTS_AT_COLUMN => 'datetime',
         self::ENDS_AT_COLUMN   => 'datetime',
     ];
+
+    public function getId(): string
+    {
+        return $this->getAttribute(self::ID_COLUMN);
+    }
 }
