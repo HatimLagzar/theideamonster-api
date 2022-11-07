@@ -9,6 +9,16 @@ use App\Http\Controllers\Category\CreateCategoryController;
 use App\Http\Controllers\Category\DeleteCategoryController;
 use App\Http\Controllers\Category\GetUserCategoriesController;
 use App\Http\Controllers\Category\UpdateCategoryController;
+use App\Http\Controllers\Delegable\CreateController as CreateDelegableController;
+use App\Http\Controllers\Delegable\DeleteController as DeleteDelegableController;
+use App\Http\Controllers\Delegable\ListController as ListDelegablesController;
+use App\Http\Controllers\Delegable\UpdateController as UpdateDelegableController;
+use App\Http\Controllers\Milestone\CreateController as CreateMilestoneController;
+use App\Http\Controllers\Milestone\DeleteController as DeleteMilestoneController;
+use App\Http\Controllers\Milestone\ListController as ListMilestonesController;
+use App\Http\Controllers\Milestone\UpdateController as UpdateMilestoneController;
+use App\Http\Controllers\Profile\UpdateController as UpdateProfileController;
+use App\Http\Controllers\Quote\GetRandomQuoteController;
 use App\Http\Controllers\Subscriptions\ConfirmSubscriptionController;
 use App\Http\Controllers\Subscriptions\CreatePaymentIntentController;
 use App\Http\Controllers\Task\CreateTaskController;
@@ -55,5 +65,29 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('subscriptions')->group(function () {
         Route::post('intent', CreatePaymentIntentController::class);
         Route::post('confirm/{setupIntentId}', ConfirmSubscriptionController::class);
+    });
+
+    Route::prefix('quotes')->group(function () {
+        Route::get('/', GetRandomQuoteController::class);
+    });
+
+    Route::middleware('is-subscribed')->group(function () {
+        Route::prefix('delegables')->group(function () {
+            Route::get('/', ListDelegablesController::class);
+            Route::post('/', CreateDelegableController::class);
+            Route::post('{id}', UpdateDelegableController::class);
+            Route::delete('{id}', DeleteDelegableController::class);
+        });
+
+        Route::prefix('milestones')->group(function () {
+            Route::get('/', ListMilestonesController::class);
+            Route::post('/', CreateMilestoneController::class);
+            Route::post('{id}', UpdateMilestoneController::class);
+            Route::delete('{id}', DeleteMilestoneController::class);
+        });
+
+        Route::prefix('profiles')->group(function () {
+            Route::post('{id}', UpdateProfileController::class);
+        });
     });
 });

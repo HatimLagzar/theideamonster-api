@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\BaseController;
 use App\Services\Core\Category\CategoryService;
+use App\Transformers\Category\CategoryTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -11,10 +12,12 @@ use Throwable;
 class GetUserCategoriesController extends BaseController
 {
     private CategoryService $categoryService;
+    private CategoryTransformer $categoryTransformer;
 
-    public function __construct(CategoryService $categoryService)
+    public function __construct(CategoryService $categoryService, CategoryTransformer $categoryTransformer)
     {
         $this->categoryService = $categoryService;
+        $this->categoryTransformer = $categoryTransformer;
     }
 
     public function __invoke(): JsonResponse
@@ -25,8 +28,8 @@ class GetUserCategoriesController extends BaseController
             $categories = $this->categoryService->getAllByUser($user);
 
             return $this->withSuccess([
-                'message' => 'Categories fetched successfully.',
-                'categories' => $categories
+                'message'    => 'Categories fetched successfully.',
+                'categories' => $this->categoryTransformer->transformMany($categories)
             ]);
         } catch (Throwable $e) {
             Log::error('failed to fetch categories', [

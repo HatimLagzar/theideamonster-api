@@ -24,7 +24,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'verification_token' => Str::random(10),
             'type' => User::NORMAL_TYPE,
-            'gender' => User::MALE_GENDER,
+//            'gender' => User::MALE_GENDER,
         ];
     }
 
