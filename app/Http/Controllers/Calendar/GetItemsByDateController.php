@@ -6,11 +6,12 @@ use App\Http\Controllers\BaseController;
 use App\Services\Core\Calendar\CalendarService;
 use App\Services\Core\Category\CategoryService;
 use App\Services\Core\Task\TaskService;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class ListController extends BaseController
+class GetItemsByDateController extends BaseController
 {
     private CalendarService $calendarService;
     private CategoryService $categoryService;
@@ -26,19 +27,19 @@ class ListController extends BaseController
         $this->taskService = $taskService;
     }
 
-    public function __invoke(): JsonResponse
+    public function __invoke(string $date): JsonResponse
     {
         try {
             $user = $this->getAuthUser();
 
-            $calendar = $this->calendarService->getByUser($user);
+            $calendar = $this->calendarService->getByUserAndDate($user, Carbon::createFromTimestamp(strtotime($date)));
 
             return $this->withSuccess([
                 'message'  => 'Calendar fetched successfully.',
                 'calendar' => $calendar
             ]);
         } catch (Throwable $e) {
-            Log::error('failed to list calendar', [
+            Log::error('failed to list calendar by date', [
                 'error_message' => $e->getMessage(),
             ]);
 

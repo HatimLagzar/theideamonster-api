@@ -5,6 +5,7 @@ namespace App\Services\Core\Calendar;
 use App\Models\Calendar;
 use App\Models\User;
 use App\Repositories\Calendar\CalendarRepository;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class CalendarService
@@ -48,5 +49,15 @@ class CalendarService
     public function getByUser(User $user): Collection
     {
         return $this->calendarRepository->getByUser($user->getId());
+    }
+
+    /**
+     * @param User $user
+     * @param Carbon $date
+     * @return Calendar[]|Collection
+     */
+    public function getByUserAndDate(User $user, Carbon $date): Collection
+    {
+        return $this->calendarRepository->getByUserAndDate($user->getId(), $date);
     }
 }

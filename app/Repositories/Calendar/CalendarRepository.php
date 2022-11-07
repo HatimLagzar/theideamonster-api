@@ -4,6 +4,7 @@ namespace App\Repositories\Calendar;
 
 use App\Models\Calendar;
 use App\Repositories\AbstractEloquentRepository;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class CalendarRepository extends AbstractEloquentRepository
@@ -52,6 +53,22 @@ class CalendarRepository extends AbstractEloquentRepository
     {
         return $this->getQueryBuilder()
             ->where(Calendar::USER_ID_COLUMN, $userId)
+            ->get();
+    }
+
+    /**
+     * @param string $userId
+     * @param Carbon $date
+     * @return Calendar[]|Collection
+     */
+    public function getByUserAndDate(string $userId, Carbon $date): Collection
+    {
+        return $this->getQueryBuilder()
+            ->where(Calendar::USER_ID_COLUMN, $userId)
+            ->where(function ($query) use ($date) {
+                $query->whereDate(Calendar::STARTS_AT_COLUMN, '<=', $date->startOfDay())
+                    ->whereDate(Calendar::ENDS_AT_COLUMN, '>=', $date->endOfDay());
+            })
             ->get();
     }
 
