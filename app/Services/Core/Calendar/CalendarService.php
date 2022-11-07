@@ -5,6 +5,7 @@ namespace App\Services\Core\Calendar;
 use App\Models\Calendar;
 use App\Models\User;
 use App\Repositories\Calendar\CalendarRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class CalendarService
 {
@@ -38,5 +39,14 @@ class CalendarService
     public function delete(User $user, string $id): bool
     {
         return $this->calendarRepository->delete($user->getId(), $id);
+    }
+
+    /**
+     * @param User $user
+     * @return Calendar[]|Collection
+     */
+    public function getByUser(User $user): Collection
+    {
+        return $this->calendarRepository->getByUser($user->getId());
     }
 }

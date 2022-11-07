@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SendPasswordResetLinkController;
 use App\Http\Controllers\Calendar\DeleteController as DeleteFromCalendarController;
+use App\Http\Controllers\Calendar\ListController as ListCalendarController;
 use App\Http\Controllers\Calendar\StoreController as StoreInCalendarController;
 use App\Http\Controllers\Calendar\UpdateController as UpdateInCalendarController;
 use App\Http\Controllers\Category\CreateCategoryController;
@@ -94,6 +95,7 @@ Route::middleware('auth:api')->group(function () {
         });
 
         Route::prefix('calendar')->group(function () {
+            Route::get('/', ListCalendarController::class);
             Route::post('/', StoreInCalendarController::class);
             Route::post('{id}', UpdateInCalendarController::class);
             Route::delete('{id}', DeleteFromCalendarController::class);
