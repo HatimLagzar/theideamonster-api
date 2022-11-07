@@ -70,4 +70,9 @@ class Task extends ModelUuid
     {
         return $this->getAttribute(self::TYPE_COLUMN);
     }
+
+    public function isAudio(): bool
+    {
+        return $this->getType() === self::AUDIO_TYPE;
+    }
 }

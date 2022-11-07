@@ -40,4 +40,9 @@ class Category extends ModelUuid
     {
         return $this->hasMany(Task::class, Task::CATEGORY_ID_COLUMN, self::ID_COLUMN);
     }
+
+    public function getCreatedAt()
+    {
+        return $this->getAttribute(self::CREATED_AT);
+    }
 }

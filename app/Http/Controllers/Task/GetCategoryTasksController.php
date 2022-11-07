@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Models\Category;
 use App\Services\Core\Category\CategoryService;
 use App\Services\Core\Task\TaskService;
+use App\Transformers\Task\CategoryTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +16,16 @@ class GetCategoryTasksController extends BaseController
 {
     private TaskService $taskService;
     private CategoryService $categoryService;
+    private CategoryTransformer $taskTransformer;
 
-    public function __construct(TaskService $taskService, CategoryService $categoryService)
-    {
+    public function __construct(
+        TaskService $taskService,
+        CategoryService $categoryService,
+        CategoryTransformer $taskTransformer
+    ) {
         $this->taskService = $taskService;
         $this->categoryService = $categoryService;
+        $this->taskTransformer = $taskTransformer;
     }
 
     public function __invoke(string $categoryId): JsonResponse
@@ -36,7 +42,7 @@ class GetCategoryTasksController extends BaseController
 
             return $this->withSuccess([
                 'message' => 'Tasks fetched successfully.',
-                'tasks' => $tasks
+                'tasks' => $this->taskTransformer->transformMany($tasks)
             ]);
         } catch (Throwable $e) {
             Log::error('failed to fetch tasks', [

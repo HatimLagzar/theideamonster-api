@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Task;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Task\CreateTaskRequest;
 use App\Services\Domain\Task\CreateTaskService;
-use App\Transformers\Task\TaskTransformer;
+use App\Transformers\Task\CategoryTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -13,9 +13,9 @@ use Throwable;
 class CreateTaskController extends BaseController
 {
     private CreateTaskService $createTaskService;
-    private TaskTransformer $taskTransformer;
+    private CategoryTransformer $taskTransformer;
 
-    public function __construct(CreateTaskService $createTaskService, TaskTransformer $taskTransformer)
+    public function __construct(CreateTaskService $createTaskService, CategoryTransformer $taskTransformer)
     {
         $this->createTaskService = $createTaskService;
         $this->taskTransformer = $taskTransformer;
