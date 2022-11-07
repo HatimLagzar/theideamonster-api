@@ -10,6 +10,7 @@ class Calendar extends ModelUuid
 
     public const TABLE = 'calendar';
     public const ID_COLUMN = 'id';
+    public const USER_ID_COLUMN = 'user_id';
     public const BASKET_ID_COLUMN = 'basket_id';
     public const TASK_ID_COLUMN = 'task_id';
     public const STARTS_AT_COLUMN = 'starts_at';
@@ -18,6 +19,7 @@ class Calendar extends ModelUuid
     protected $table = self::TABLE;
 
     protected $fillable = [
+        self::USER_ID_COLUMN,
         self::BASKET_ID_COLUMN,
         self::TASK_ID_COLUMN,
         self::STARTS_AT_COLUMN,

@@ -15,6 +15,7 @@ class CreateCalendarTable extends Migration
     {
         Schema::create('calendar', function (Blueprint $table) {
             $table->uuid('id')->unique();
+            $table->string('user_id');
             $table->string('basket_id');
             $table->string('task_id')->nullable();
             $table->dateTime('starts_at')->nullable();

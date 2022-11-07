@@ -55,6 +55,7 @@ class StoreController extends BaseController
             }
 
             $item = $this->calendarService->create([
+                Calendar::USER_ID_COLUMN   => $user->getId(),
                 Calendar::BASKET_ID_COLUMN => $basket->getId(),
                 Calendar::TASK_ID_COLUMN   => $taskId,
                 Calendar::STARTS_AT_COLUMN => $request->get('starts_at'),
