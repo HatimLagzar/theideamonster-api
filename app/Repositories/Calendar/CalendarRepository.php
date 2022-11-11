@@ -9,9 +9,10 @@ use Illuminate\Database\Eloquent\Collection;
 
 class CalendarRepository extends AbstractEloquentRepository
 {
-    public function findById(string $id): ?Calendar
+    public function findById(string $userId, string $id): ?Calendar
     {
         return $this->getQueryBuilder()
+            ->where(Calendar::USER_ID_COLUMN, $userId)
             ->where(Calendar::ID_COLUMN, $id)
             ->first();
     }

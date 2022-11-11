@@ -17,9 +17,9 @@ class CalendarService
         $this->calendarRepository = $calendarRepository;
     }
 
-    public function findById(string $id): ?Calendar
+    public function findById(User $user, string $id): ?Calendar
     {
-        return $this->calendarRepository->findById($id);
+        return $this->calendarRepository->findById($user->getId(), $id);
     }
 
     public function create(array $attributes): Calendar
