@@ -53,6 +53,7 @@ class CalendarRepository extends AbstractEloquentRepository
     {
         return $this->getQueryBuilder()
             ->where(Calendar::USER_ID_COLUMN, $userId)
+            ->orderBy(Calendar::STARTS_AT_COLUMN, 'ASC')
             ->get();
     }
 
@@ -69,6 +70,20 @@ class CalendarRepository extends AbstractEloquentRepository
                 $query->whereDate(Calendar::STARTS_AT_COLUMN, '<=', $date->startOfDay())
                     ->whereDate(Calendar::ENDS_AT_COLUMN, '>=', $date->endOfDay());
             })
+            ->orderBy(Calendar::STARTS_AT_COLUMN, 'ASC')
+            ->get();
+    }
+
+    /**
+     * @param string $userId
+     * @return Calendar[]|Collection
+     */
+    public function getByUserAndUncategorized(string $userId): Collection
+    {
+        return $this->getQueryBuilder()
+            ->whereNull(Calendar::ENDS_AT_COLUMN)
+            ->whereNull(Calendar::STARTS_AT_COLUMN)
+            ->where(Calendar::USER_ID_COLUMN, $userId)
             ->get();
     }
 
