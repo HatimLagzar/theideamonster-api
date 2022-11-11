@@ -60,4 +60,13 @@ class CalendarService
     {
         return $this->calendarRepository->getByUserAndDate($user->getId(), $date);
     }
+
+    /**
+     * @param User $user
+     * @return Calendar[]|Collection
+     */
+    public function getByUserAndUncategorized(User $user): Collection
+    {
+        return $this->calendarRepository->getByUserAndUncategorized($user->getId());
+    }
 }

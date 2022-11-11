@@ -33,10 +33,12 @@ class GetItemsByDateController extends BaseController
             $user = $this->getAuthUser();
 
             $calendar = $this->calendarService->getByUserAndDate($user, Carbon::createFromTimestamp(strtotime($date)));
+            $uncategorizedItems = $this->calendarService->getByUserAndUncategorized($user);
 
             return $this->withSuccess([
-                'message'  => 'Calendar fetched successfully.',
-                'calendar' => $calendar
+                'message'               => 'Calendar fetched successfully.',
+                'calendar'              => $calendar,
+                'uncategorizedCalendar' => $uncategorizedItems,
             ]);
         } catch (Throwable $e) {
             Log::error('failed to list calendar by date', [
