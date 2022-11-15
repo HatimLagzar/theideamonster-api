@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Notification\GetCreateNotificationPageController;
+use App\Http\Controllers\Notification\ListNotificationsController;
 use App\Http\Controllers\Notification\StoreNotificationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ Route::prefix('admin')->group(function () {
 
     Route::middleware('auth:web')->group(function () {
         Route::prefix('notifications')->name('notifications.')->group(function () {
+            Route::get('/', ListNotificationsController::class)->name('index');
             Route::get('create', GetCreateNotificationPageController::class)->name('create');
             Route::post('/', StoreNotificationController::class)->name('store');
         });

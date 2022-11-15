@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Notification;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Notification\StoreRequest;
-use App\Models\Notification;
 use App\Services\Core\Notification\NotificationService;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class StoreNotificationController extends Controller
+class ListNotificationsController extends Controller
 {
     private NotificationService $notificationService;
 
@@ -18,18 +16,15 @@ class StoreNotificationController extends Controller
         $this->notificationService = $notificationService;
     }
 
-    public function __invoke(StoreRequest $request)
+    public function __invoke()
     {
         try {
-            $this->notificationService->create([
-                Notification::CONTENT_COLUMN => $request->get('content')
-            ]);
+            $notifications = $this->notificationService->getAll();
 
-            return redirect()
-                ->route('notifications.index')
-                ->with('success', 'Notification created successfully');
+            return view('admin.notifications.index')
+                ->with('notifications', $notifications);
         } catch (Throwable $e) {
-            Log::error('failed create new notification', [
+            Log::error('failed show create notification page', [
                 'error_message' => $e->getMessage()
             ]);
 

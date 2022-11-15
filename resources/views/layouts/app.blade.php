@@ -35,7 +35,7 @@
                     <ul class="navbar-nav me-auto">
                         @auth
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Notifications</a>
+                                <a href="{{ route('notifications.index') }}" class="nav-link">Notifications</a>
                             </li>
                         @endif
                     </ul>

@@ -4,6 +4,7 @@ namespace App\Services\Core\Notification;
 
 use App\Models\Notification;
 use App\Repositories\Notification\NotificationRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class NotificationService
 {
@@ -21,5 +22,13 @@ class NotificationService
     public function create(array $attributes): Notification
     {
         return $this->notificationRepository->create($attributes);
+    }
+
+    /**
+     * @return Notification[]|Collection
+     */
+    public function getAll(): Collection
+    {
+        return $this->notificationRepository->getAll();
     }
 }
