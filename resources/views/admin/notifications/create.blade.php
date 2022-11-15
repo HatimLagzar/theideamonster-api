@@ -1,0 +1,19 @@
+@extends('layouts.app')
+@section('content')
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h3>Add Notification</h3>
+        <form action="{{ route('notifications.store') }}" method="POST">
+          @csrf
+          <div class="form-group mb-2">
+            <label for="contentInput" class="form-label">Notification Content</label>
+            <input type="text" name="content" id="contentInput" class="form-control">
+          </div>
+
+          <button class="btn btn-primary">Create</button>
+        </form>
+      </div>
+    </div>
+  </div>
+@endsection
