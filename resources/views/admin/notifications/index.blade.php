@@ -29,7 +29,14 @@
               <td>{{ $key + 1 }}</td>
               <td>{{ $notification->getContent() }}</td>
               <td>{{ $notification->getCreatedAt() }}</td>
-              <td><a href="{{ route('notifications.edit', ['notification' => $notification]) }}">Edit</a></td>
+              <td>
+                <a class="btn btn-secondary btn-sm" href="{{ route('notifications.edit', ['notification' => $notification]) }}">Edit</a>
+                <form method="POST" action="{{ route('notifications.delete', ['notification' => $notification]) }}" class="d-inline-block">
+                  @method('DELETE')
+                  @csrf
+                  <button class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </td>
             </tr>
           @endforeach
           </tbody>

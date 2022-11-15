@@ -34,6 +34,13 @@ class NotificationRepository extends AbstractEloquentRepository
                 ->update($attributes) > 0;
     }
 
+    public function delete(int $id): bool
+    {
+        return $this->getQueryBuilder()
+                ->where(Notification::ID_COLUMN, $id)
+                ->delete() > 0;
+    }
+
     protected function getModelClass(): string
     {
         return Notification::class;

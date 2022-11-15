@@ -36,4 +36,9 @@ class NotificationService
     {
         return $this->notificationRepository->update($notification->getId(), $attributes);
     }
+
+    public function delete(Notification $notification): bool
+    {
+        return $this->notificationRepository->delete($notification->getId());
+    }
 }
