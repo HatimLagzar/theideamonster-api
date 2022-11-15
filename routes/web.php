@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('verification.verify');
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::get('login', function () {
+        return view('auth.login');
+    })->name('login');
+
+    Auth::routes(['register' => env('ALLOW_ADMIN_REGISTER', false)]);
+});

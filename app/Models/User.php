@@ -30,6 +30,7 @@ class User extends AuthenticatableUuid implements JWTSubject
     public const TYPE_COLUMN = 'type';
     public const REMEMBER_TOKEN_COLUMN = 'remember_token';
     public const EMAIL_VERIFIED_AT_COLUMN = 'email_verified_at';
+    public const ADMIN_ROLE = 2;
 
     /**
      * The attributes that are mass assignable.
