@@ -8,7 +8,7 @@
       <div class="col-md-8">
         <div class="row">
           <div class="col">
-            <h3>Add Notification</h3>
+            <h3>List Notification</h3>
           </div>
           <div class="col">
             <a href="{{ route('notifications.create') }}" class="btn btn-primary float-end ms-auto">Create</a>
