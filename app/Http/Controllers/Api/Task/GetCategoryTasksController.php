@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Models\Category;
 use App\Services\Core\Category\CategoryService;
 use App\Services\Core\Task\TaskService;
-use App\Transformers\Task\CategoryTransformer;
+use App\Transformers\Task\TaskTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,12 +16,12 @@ class GetCategoryTasksController extends BaseController
 {
     private TaskService $taskService;
     private CategoryService $categoryService;
-    private CategoryTransformer $taskTransformer;
+    private TaskTransformer $taskTransformer;
 
     public function __construct(
         TaskService $taskService,
         CategoryService $categoryService,
-        CategoryTransformer $taskTransformer
+        TaskTransformer $taskTransformer
     ) {
         $this->taskService = $taskService;
         $this->categoryService = $categoryService;
