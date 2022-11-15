@@ -31,4 +31,9 @@ class NotificationService
     {
         return $this->notificationRepository->getAll();
     }
+
+    public function update(Notification $notification, array $attributes): bool
+    {
+        return $this->notificationRepository->update($notification->getId(), $attributes);
+    }
 }

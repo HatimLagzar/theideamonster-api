@@ -29,7 +29,7 @@
               <td>{{ $key + 1 }}</td>
               <td>{{ $notification->getContent() }}</td>
               <td>{{ $notification->getCreatedAt() }}</td>
-              <td></td>
+              <td><a href="{{ route('notifications.edit', ['notification' => $notification]) }}">Edit</a></td>
             </tr>
           @endforeach
           </tbody>
