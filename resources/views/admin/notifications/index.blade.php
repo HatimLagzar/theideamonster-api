@@ -19,6 +19,7 @@
           <tr>
             <th>#</th>
             <th>Content</th>
+            <th># Times Sent</th>
             <th>Created At</th>
             <th>Actions</th>
           </tr>
@@ -29,8 +30,13 @@
               <td>{{ $key + 1 }}</td>
               <td>{{ $notification->getContent() }}</td>
               <td>{{ $notification->getCreatedAt() }}</td>
+              <td>{{ $notification->getTimesSent() }}</td>
               <td>
                 <a class="btn btn-secondary btn-sm" href="{{ route('notifications.edit', ['notification' => $notification]) }}">Edit</a>
+                <form method="POST" action="{{ route('notifications.push', ['notification' => $notification]) }}" class="d-inline-block">
+                  @csrf
+                  <button class="btn btn-warning btn-sm">Send</button>
+                </form>
                 <form method="POST" action="{{ route('notifications.delete', ['notification' => $notification]) }}" class="d-inline-block">
                   @method('DELETE')
                   @csrf

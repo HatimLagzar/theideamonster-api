@@ -14,6 +14,7 @@ class Notification extends Model
     public const ID_COLUMN = 'id';
     public const CONTENT_COLUMN = 'content';
     public const CREATED_AT_COLUMN = 'created_at';
+    public const TIMES_SENT_COLUMN = 'times_sent';
 
     protected $table = self::TABLE;
 
@@ -28,6 +29,11 @@ class Notification extends Model
     public function getId(): int
     {
         return $this->getAttribute(self::ID_COLUMN);
+    }
+
+    public function getTimesSent(): int
+    {
+        return $this->getAttribute(self::TIMES_SENT_COLUMN);
     }
 
     public function getContent(): string

@@ -41,4 +41,9 @@ class NotificationService
     {
         return $this->notificationRepository->delete($notification->getId());
     }
+
+    public function increment(Notification $notification, string $column): bool
+    {
+        return $this->notificationRepository->increment($notification->getId(), $column);
+    }
 }

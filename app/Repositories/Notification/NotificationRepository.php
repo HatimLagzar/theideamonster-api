@@ -41,6 +41,13 @@ class NotificationRepository extends AbstractEloquentRepository
                 ->delete() > 0;
     }
 
+    public function increment(int $id, string $column): bool
+    {
+        return $this->getQueryBuilder()
+                ->where(Notification::ID_COLUMN, $id)
+                ->increment($column) > 0;
+    }
+
     protected function getModelClass(): string
     {
         return Notification::class;

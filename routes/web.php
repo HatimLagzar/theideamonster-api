@@ -4,6 +4,7 @@ use App\Http\Controllers\Notification\DeleteNotificationController;
 use App\Http\Controllers\Notification\EditNotificationController;
 use App\Http\Controllers\Notification\GetCreateNotificationPageController;
 use App\Http\Controllers\Notification\ListNotificationsController;
+use App\Http\Controllers\Notification\PushNotificationController;
 use App\Http\Controllers\Notification\StoreNotificationController;
 use App\Http\Controllers\Notification\UpdateNotificationController;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,7 @@ Route::prefix('admin')->group(function () {
             Route::get('create', GetCreateNotificationPageController::class)->name('create');
             Route::get('{notification}', EditNotificationController::class)->name('edit');
             Route::post('{notification}', UpdateNotificationController::class)->name('update');
+            Route::post('{notification}', PushNotificationController::class)->name('push');
             Route::delete('{notification}', DeleteNotificationController::class)->name('delete');
             Route::post('/', StoreNotificationController::class)->name('store');
         });
