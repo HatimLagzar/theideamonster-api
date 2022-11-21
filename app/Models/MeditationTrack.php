@@ -48,4 +48,9 @@ class MeditationTrack extends ModelUuid
     {
         return $this->getAttribute(self::CREATED_AT_COLUMN);
     }
+
+    public function getTrackFileName(): string
+    {
+        return $this->getAttribute(self::TRACK_FILENAME_COLUMN);
+    }
 }

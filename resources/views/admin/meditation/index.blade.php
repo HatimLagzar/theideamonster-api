@@ -32,7 +32,7 @@
               <td>{{ $track->getDuration() }}</td>
               <td>{{ $track->getCreatedAt() }}</td>
               <td>
-{{--                <a class="btn btn-secondary btn-sm" href="{{ route('notifications.edit', ['track' => $track]) }}">Edit</a>--}}
+                <a class="btn btn-secondary btn-sm" href="{{ route('meditation.edit', ['track' => $track]) }}">Edit</a>
 {{--                <form method="POST" action="{{ route('notifications.push', ['track' => $track]) }}" class="d-inline-block">--}}
 {{--                  @csrf--}}
 {{--                  <button class="btn btn-warning btn-sm">Send</button>--}}

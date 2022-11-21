@@ -31,4 +31,9 @@ class MeditationTrackService
     {
         return $this->meditationTrackRepository->getAll();
     }
+
+    public function update(MeditationTrack $track, array $attributes): bool
+    {
+        return $this->meditationTrackRepository->update($track->getId(), $attributes);
+    }
 }

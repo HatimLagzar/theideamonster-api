@@ -27,6 +27,13 @@ class MeditationTrackRepository extends AbstractEloquentRepository
             ->get();
     }
 
+    public function update(string $id, array $attributes): bool
+    {
+        return $this->getQueryBuilder()
+                ->where(MeditationTrack::ID_COLUMN, $id)
+                ->update($attributes) > 0;
+    }
+
     protected function getModelClass(): string
     {
         return MeditationTrack::class;
