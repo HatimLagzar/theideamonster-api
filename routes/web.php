@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\MeditationTrack\CreateController as CreateMeditationController;
+use App\Http\Controllers\MeditationTrack\IndexController as IndexMeditationController;
+use App\Http\Controllers\MeditationTrack\StoreController as StoreMeditationController;
 use App\Http\Controllers\Notification\DeleteNotificationController;
 use App\Http\Controllers\Notification\EditNotificationController;
 use App\Http\Controllers\Notification\GetCreateNotificationPageController;
@@ -43,6 +46,12 @@ Route::prefix('admin')->group(function () {
             Route::post('{notification}', PushNotificationController::class)->name('push');
             Route::delete('{notification}', DeleteNotificationController::class)->name('delete');
             Route::post('/', StoreNotificationController::class)->name('store');
+        });
+
+        Route::prefix('meditation')->name('meditation.')->group(function () {
+            Route::get('/', IndexMeditationController::class)->name('index');
+            Route::get('create', CreateMeditationController::class)->name('create');
+            Route::post('/', StoreMeditationController::class)->name('store');
         });
     });
 });

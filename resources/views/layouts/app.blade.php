@@ -37,6 +37,9 @@
                             <li class="nav-item">
                                 <a href="{{ route('notifications.index') }}" class="nav-link">Notifications</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('notifications.index') }}" class="nav-link">Meditation</a>
+                            </li>
                         @endif
                     </ul>
 
