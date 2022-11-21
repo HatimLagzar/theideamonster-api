@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MeditationTrack\CreateController as CreateMeditationController;
+use App\Http\Controllers\MeditationTrack\DeleteController as DeleteMeditationController;
 use App\Http\Controllers\MeditationTrack\EditController as EditMeditationController;
 use App\Http\Controllers\MeditationTrack\IndexController as IndexMeditationController;
 use App\Http\Controllers\MeditationTrack\StoreController as StoreMeditationController;
@@ -56,6 +57,7 @@ Route::prefix('admin')->group(function () {
             Route::post('/', StoreMeditationController::class)->name('store');
             Route::get('{track}/edit', EditMeditationController::class)->name('edit');
             Route::post('{track}', UpdateMeditationController::class)->name('update');
+            Route::delete('{track}', DeleteMeditationController::class)->name('delete');
         });
     });
 });

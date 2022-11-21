@@ -33,15 +33,11 @@
               <td>{{ $track->getCreatedAt() }}</td>
               <td>
                 <a class="btn btn-secondary btn-sm" href="{{ route('meditation.edit', ['track' => $track]) }}">Edit</a>
-{{--                <form method="POST" action="{{ route('notifications.push', ['track' => $track]) }}" class="d-inline-block">--}}
-{{--                  @csrf--}}
-{{--                  <button class="btn btn-warning btn-sm">Send</button>--}}
-{{--                </form>--}}
-{{--                <form method="POST" action="{{ route('notifications.delete', ['track' => $track]) }}" class="d-inline-block">--}}
-{{--                  @method('DELETE')--}}
-{{--                  @csrf--}}
-{{--                  <button class="btn btn-danger btn-sm">Delete</button>--}}
-{{--                </form>--}}
+                <form method="POST" action="{{ route('meditation.delete', ['track' => $track]) }}" class="d-inline-block">
+                  @method('DELETE')
+                  @csrf
+                  <button class="btn btn-danger btn-sm">Delete</button>
+                </form>
               </td>
             </tr>
           @endforeach
