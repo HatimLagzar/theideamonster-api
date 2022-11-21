@@ -28,11 +28,11 @@ RUN pecl install redis-5.1.1 \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN echo "file_uploads = On\n" \
-         "memory_limit = 500M\n" \
-         "upload_max_filesize = 500M\n" \
-         "post_max_size = 500M\n" \
-         "max_execution_time = 600\n" \
+RUN echo "file_uploads=On\n" \
+         "memory_limit=64M\n" \
+         "upload_max_filesize=64M\n" \
+         "post_max_size=64M\n" \
+         "max_execution_time=600\n" \
          > /usr/local/etc/php/conf.d/uploads.ini
 
 RUN apt-get install git -y
