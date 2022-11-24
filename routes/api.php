@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\Delegable\CreateController as CreateDelegableContro
 use App\Http\Controllers\Api\Delegable\DeleteController as DeleteDelegableController;
 use App\Http\Controllers\Api\Delegable\ListController as ListDelegablesController;
 use App\Http\Controllers\Api\Delegable\UpdateController as UpdateDelegableController;
+use App\Http\Controllers\Api\Meditation\ListMeditationTracksController;
 use App\Http\Controllers\Api\Milestone\CreateController as CreateMilestoneController;
 use App\Http\Controllers\Api\Milestone\DeleteController as DeleteMilestoneController;
 use App\Http\Controllers\Api\Milestone\ListController as ListMilestonesController;
@@ -94,6 +95,10 @@ Route::middleware('auth:api')->group(function () {
 
         Route::prefix('profiles')->group(function () {
             Route::post('{id}', UpdateProfileController::class);
+        });
+
+        Route::prefix('meditation')->group(function () {
+            Route::get('/', ListMeditationTracksController::class);
         });
 
         Route::prefix('calendar')->group(function () {
