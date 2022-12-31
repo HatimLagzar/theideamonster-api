@@ -20,8 +20,6 @@ class ConfirmSubscriptionController extends BaseController
                 return $this->withError('You are already subscribed to our services.');
             }
 
-            Stripe::setApiKey(env('STRIPE_SECRET'));
-
             $setupIntent = SetupIntent::retrieve($setupIntentId);
             $paymentMethodId = $setupIntent->payment_method;
 

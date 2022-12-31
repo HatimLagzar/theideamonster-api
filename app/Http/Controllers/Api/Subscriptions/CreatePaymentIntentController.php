@@ -16,25 +16,10 @@ class CreatePaymentIntentController extends BaseController
         try {
             $user = $this->getAuthUser();
 
-            // This is your test secret API key.
-            Stripe::setApiKey(env('STRIPE_SECRET'));
-
             $customer = $user->createOrGetStripeCustomer([
                 'name'  => $user->getFullName(),
                 'email' => $user->getEmail(),
             ]);
-
-            $productPrice = Price::retrieve(env('SUBSCRIPTION_STRIPE_PRODUCT_ID'));
-
-//            $intent = PaymentIntent::create([
-//                'amount'                    => $productPrice->unit_amount,
-//                'currency'                  => $productPrice->currency,
-//                'setup_future_usage'        => 'off_session',
-//                'customer'                  => $customer->id,
-//                'automatic_payment_methods' => [
-//                    'enabled' => 'true',
-//                ],
-//            ]);
 
             $intent = $user->createSetupIntent([
                 'customer' => $customer->id,
