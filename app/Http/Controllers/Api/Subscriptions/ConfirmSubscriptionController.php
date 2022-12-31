@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Subscriptions;
 use App\Http\Controllers\Api\BaseController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
+use Stripe\Exception\CardException;
 use Stripe\SetupIntent;
 use Stripe\Stripe;
 use Throwable;
@@ -29,6 +30,12 @@ class ConfirmSubscriptionController extends BaseController
             return $this->withSuccess([
                 'message' => 'You did subscribe successfully.'
             ]);
+        } catch (CardException $e) {
+            Log::error('card error', [
+                'error_message' => $e->getError()->message,
+            ]);
+
+            return $this->withError($e->getError()->message);
         } catch (Throwable $e) {
             Log::error('failed to confirm subscription', [
                 'error_message' => $e->getMessage(),
