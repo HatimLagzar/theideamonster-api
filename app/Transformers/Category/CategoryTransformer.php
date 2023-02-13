@@ -20,6 +20,7 @@ class CategoryTransformer
         return [
             'id'         => $category->getId(),
             'name'       => $category->getName(),
+            'logo'       => $category->getLogoFullPath(),
             'user_id'    => $category->getUserId(),
             'tasks'      => $this->taskTransformer->transformMany($category->tasks()->get()),
             'created_at' => $category->getCreatedAt(),

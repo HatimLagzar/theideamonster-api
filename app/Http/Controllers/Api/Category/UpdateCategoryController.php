@@ -30,13 +30,25 @@ class UpdateCategoryController extends BaseController
                 return $this->withError('Category not found!', Response::HTTP_NOT_FOUND);
             }
 
+            $filename = $category->getLogo();
+            if ($request->file('logo')) {
+                $file = $request->file('logo');
+                $filename = $file->hashName();
+                $file->storeAs('public/baskets_logos/', $filename);
+            }
+
             $this->categoryService->update($category, [
-                Category::NAME_COLUMN => $request->get('name'),
+                Category::NAME_COLUMN    => $request->get('name'),
+                Category::LOGO_COLUMN    => $filename,
                 Category::USER_ID_COLUMN => $user->getId(),
             ]);
 
+            $category = $category->refresh();
+            $category->logo = $category->getLogoFullPath();
+
             return $this->withSuccess([
                 'message' => 'Category updated successfully.',
+                'basket'  => $category
             ]);
         } catch (Throwable $e) {
             Log::error('failed to update category', [

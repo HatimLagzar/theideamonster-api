@@ -14,11 +14,13 @@ class Category extends ModelUuid
     public const ID_COLUMN = 'id';
     public const NAME_COLUMN = 'name';
     public const USER_ID_COLUMN = 'user_id';
+    public const LOGO_COLUMN = 'logo';
 
     protected $table = self::TABLE;
     protected $fillable = [
         self::NAME_COLUMN,
         self::USER_ID_COLUMN,
+        self::LOGO_COLUMN,
     ];
 
     public function getId(): string
@@ -29,6 +31,20 @@ class Category extends ModelUuid
     public function getName(): string
     {
         return $this->getAttribute(self::NAME_COLUMN);
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->getAttribute(self::LOGO_COLUMN);
+    }
+
+    public function getLogoFullPath(): ?string
+    {
+        if (!$this->getLogo()) {
+            return null;
+        }
+
+        return url('storage/baskets_logos/' . $this->getLogo());
     }
 
     public function getUserId(): string

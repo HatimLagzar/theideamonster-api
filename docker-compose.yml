@@ -14,13 +14,13 @@ services:
       - theideamonster_network
 
   theideamonster_app:
-    build: "../theideamonster-react"
+    build: "../theideamonster-frontend"
     container_name: "theideamonster_app"
     ports:
       - "3000:3000"
     volumes:
       - type: bind
-        source: "./../theideamonster-react/"
+        source: "./../theideamonster-frontend/"
         target: "/var/www"
     networks:
       - theideamonster_network
